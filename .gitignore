@@ -1,0 +1,18 @@
+# ---- IDE / 编辑器 ----
+.idea/
+.vscode/
+*.iml
+
+# ---- 简道云参考文件（不要提交到 GitHub）----
+应用首页*.html
+应用首页*_files/
+
+# ---- 预览/临时文件 ----
+_preview.png
+*.tmp
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
