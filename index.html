@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-CN" theme-color="blue" nav-color="dark">
+<html lang="zh-CN" theme-color=
+
+        av-color="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -40,19 +42,19 @@
 
         <nav class="sidebar-menu">
           <!-- 流程类菜单 -->
-          <div class="menu-item flow">
+          <div class="menu-item flow" data-page="flow_todo">
             <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M512 128c-17.673 0-32 14.327-32 32v448c0 17.673 14.327 32 32 32h256c17.673 0 32-14.327 32-32V160c0-17.673-14.327-32-32-32H512zM448 160c0-35.346 28.654-64 64-64h256c35.346 0 64 28.654 64 64v448c0 35.346-28.654 64-64 64H512c-35.346 0-64-28.654-64-64V160zM160 288c0-17.673 14.327-32 32-32h224c17.673 0 32 14.327 32 32v576c0 17.673-14.327 32-32 32H192c-17.673 0-32-14.327-32-32V288zm32 0v576h224V288H192z"/></svg></span>
             <span class="menu-text">我的待办</span>
           </div>
-          <div class="menu-item flow">
+          <div class="menu-item flow" data-page="flow_create">
             <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M512 128c-17.673 0-32 14.327-32 32v320c0 17.673 14.327 32 32 32h320c17.673 0 32-14.327 32-32V160c0-17.673-14.327-32-32-32H512zM480 160c0-35.346 28.654-64 64-64h320c35.346 0 64 28.654 64 64v320c0 35.346-28.654 64-64 64H512c-35.346 0-64-28.654-64-64V160zM128 640c0-17.673 14.327-32 32-32h288c17.673 0 32 14.327 32 32v224c0 17.673-14.327 32-32 32H160c-17.673 0-32-14.327-32-32V640zm32 0v224h288V640H160zM480 160v-32h64v32h-64zm0 640v-32h64v32h-64z"/></svg></span>
             <span class="menu-text">我发起的</span>
           </div>
-          <div class="menu-item flow">
+          <div class="menu-item flow" data-page="flow_handled">
             <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M864 256c35.346 0 64 28.654 64 64v448c0 35.346-28.654 64-64 64H160c-35.346 0-64-28.654-64-64V320c0-35.346 28.654-64 64-64h704zm0 64H160v448h704V320zM256 448a32 32 0 0 1 32-32h256a32 32 0 0 1 0 64H288a32 32 0 0 1-32-32zm0 128a32 32 0 0 1 32-32h160a32 32 0 0 1 0 64H288a32 32 0 0 1-32-32z"/></svg></span>
             <span class="menu-text">我处理的</span>
           </div>
-          <div class="menu-item flow">
+          <div class="menu-item flow" data-page="flow_cc">
             <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M512 96c229.75 0 416 186.25 416 416S741.75 928 512 928 96 741.75 96 512 282.25 96 512 96zm0 64c-194.4 0-352 157.6-352 352s157.6 352 352 352 352-157.6 352-352-157.6-352-352-352zm0 160c35.346 0 64 28.654 64 64v128h128a64 64 0 0 1 0 128H448a64 64 0 0 1-64-64V320c0-35.346 28.654-64 64-64z"/></svg></span>
             <span class="menu-text">抄送我的</span>
           </div>
@@ -60,32 +62,67 @@
           <div class="menu-divider"></div>
 
           <!-- 页面菜单 -->
-          <div class="menu-item page active">
+          <div class="menu-item page active" data-page="home">
             <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M512 128 128 384l384 256 384-256-384-256zM128 512l96 64v192l288 192 288-192V576l96-64v288c0 35.346-28.654 64-64 64H192c-35.346 0-64-28.654-64-64V512z"/></svg></span>
             <span class="menu-text">首页</span>
           </div>
-          <div class="menu-item page">
+          <div class="menu-item page" data-page="home">
             <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M128 160c0-17.673 14.327-32 32-32h704c17.673 0 32 14.327 32 32v64c0 17.673-14.327 32-32 32H160c-17.673 0-32-14.327-32-32v-64zm0 192c0-17.673 14.327-32 32-32h256c17.673 0 32 14.327 32 32v512c0 17.673-14.327 32-32 32H160c-17.673 0-32-14.327-32-32V352zm384 0c0-17.673 14.327-32 32-32h288c17.673 0 32 14.327 32 32v320c0 17.673-14.327 32-32 32H576c-17.673 0-32-14.327-32-32V352zm64 32v256h224V384H576z"/></svg></span>
             <span class="menu-text">案件仪表盘</span>
           </div>
-          <div class="menu-item page">
+          <div class="menu-item page" data-page="entry_base">
             <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M192 160h640c35.346 0 64 28.654 64 64v576c0 35.346-28.654 64-64 64H192c-35.346 0-64-28.654-64-64V224c0-35.346 28.654-64 64-64zm0 64v576h640V224H192zm96 128h448v64H288v-64zm0 160h448v64H288v-64zm0 160h288v64H288v-64z"/></svg></span>
             <span class="menu-text">基础数据录入</span>
           </div>
-          <div class="menu-item page">
+          <div class="menu-item page" data-page="entry_cig">
             <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M128 160c0-17.673 14.327-32 32-32h192c17.673 0 32 14.327 32 32v704c0 17.673-14.327 32-32 32H160c-17.673 0-32-14.327-32-32V160zm64 32v640h128V192H192zm320-32c0-17.673 14.327-32 32-32h320c17.673 0 32 14.327 32 32v448c0 17.673-14.327 32-32 32H544c-17.673 0-32-14.327-32-32V160zm64 32v384h256V192H576z"/></svg></span>
             <span class="menu-text">卷烟信息录入</span>
           </div>
 
-          <div class="menu-group-label">基础数据</div>
-
-          <div class="menu-item page">
+          <!-- 未在当地烟草专卖批发企业进货（文书页组） -->
+          <div class="menu-item page has-sub open">
             <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M512 96c229.75 0 416 186.25 416 416S741.75 928 512 928 96 741.75 96 512 282.25 96 512 96zm0 64c-194.4 0-352 157.6-352 352s157.6 352 352 352 352-157.6 352-352-157.6-352-352-352zm-32 160h64v224h224v64H448a32 32 0 0 1-32-32V320z"/></svg></span>
             <span class="menu-text">未在当地烟草专卖批发企业进货</span>
+            <span class="sub-arrow"><svg viewBox="0 0 1024 1024" width="12" height="12" fill="currentColor"><path d="M512 714.667 213.333 416h597.334L512 714.667z"/></svg></span>
           </div>
-          <div class="menu-item page">
+          <div class="submenu">
+            <div class="submenu-item" data-page="g1_xianchang">1、现场笔录</div>
+            <div class="submenu-item" data-page="g1_zhengju">2、证据先行登记保存批准书</div>
+            <div class="submenu-item" data-page="g1_fuzhi">3、证据复制（提取）单</div>
+            <div class="submenu-item" data-page="g1_tongzhi">4、先行登记保存证据处理通知书</div>
+            <div class="submenu-item" data-page="g1_chouyang">5、抽样取证物品清单</div>
+            <div class="submenu-item" data-page="g1_xunwen">6、询问笔录</div>
+            <div class="submenu-item" data-page="g1_lian">7、立案报告</div>
+            <div class="submenu-item" data-page="g1_liangjian">8-9、鉴别检验留样告知书/涉案物品核价表</div>
+            <div class="submenu-item" data-page="g1_zhongjie">10-12、案件调查终结报告/案件处理初审表/听证告知书</div>
+          </div>
+
+          <!-- 无烟草专卖品准运证运输烟草专卖品（文书页组） -->
+          <div class="menu-item page has-sub open">
             <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M512 96c229.75 0 416 186.25 416 416S741.75 928 512 928 96 741.75 96 512 282.25 96 512 96zm0 64c-194.4 0-352 157.6-352 352s157.6 352 352 352 352-157.6 352-352-157.6-352-352-352zm-32 160h64v224h224v64H448a32 32 0 0 1-32-32V320z"/></svg></span>
             <span class="menu-text">无烟草专卖品准运证运输烟草专卖品</span>
+            <span class="sub-arrow"><svg viewBox="0 0 1024 1024" width="12" height="12" fill="currentColor"><path d="M512 714.667 213.333 416h597.334L512 714.667z"/></svg></span>
+          </div>
+          <div class="submenu">
+            <div class="submenu-item" data-page="g2_xianchang">1、现场笔录</div>
+            <div class="submenu-item" data-page="g2_zhengju">2、证据先行登记保存批准书</div>
+            <div class="submenu-item" data-page="g2_fuzhi">3、证据复制（提取）单</div>
+            <div class="submenu-item" data-page="g2_tongzhi">4、先行登记保存证据处理通知书</div>
+            <div class="submenu-item" data-page="g2_chouyang">5、抽样取证物品清单</div>
+            <div class="submenu-item" data-page="g2_xunwen">6、询问笔录</div>
+            <div class="submenu-item" data-page="g2_lian">7、立案报告</div>
+          </div>
+
+          <!-- 基础数据（数据页组） -->
+          <div class="menu-item page has-sub open">
+            <span class="menu-icon"><svg viewBox="0 0 1024 1024" width="16" height="16" fill="currentColor"><path d="M192 160h640c35.346 0 64 28.654 64 64v576c0 35.346-28.654 64-64 64H192c-35.346 0-64-28.654-64-64V224c0-35.346 28.654-64 64-64zm0 64v576h640V224H192zm96 128h448v64H288v-64zm0 160h448v64H288v-64zm0 160h288v64H288v-64z"/></svg></span>
+            <span class="menu-text">基础数据</span>
+            <span class="sub-arrow"><svg viewBox="0 0 1024 1024" width="12" height="12" fill="currentColor"><path d="M512 714.667 213.333 416h597.334L512 714.667z"/></svg></span>
+          </div>
+          <div class="submenu">
+            <div class="submenu-item" data-page="b_renyuan">执法人员库</div>
+            <div class="submenu-item" data-page="b_juanji">卷烟信息</div>
+            <div class="submenu-item" data-page="b_fagui">法规数据库</div>
           </div>
         </nav>
       </aside>
@@ -102,8 +139,11 @@
           </div>
         </header>
 
+        <!-- 动态页面容器（表单/数据表等） -->
+        <div id="page-view" class="page-view hidden"></div>
+
         <!-- 仪表盘主体 -->
-        <div class="dashboard">
+        <div id="dashboard" class="dashboard">
 
           <!-- 筛选区 -->
           <div class="widget filter-bar">
@@ -221,6 +261,7 @@
   </div>
 
   <script src="js/echarts.min.js"></script>
+  <script src="js/pages-data.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

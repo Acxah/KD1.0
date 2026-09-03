@@ -16,3 +16,6 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# 抓取的数据备份
+_data/

@@ -1,27 +1,27 @@
 /* ============================================================
    CF克旗-文书生成工具测试 — 前端复刻
-   简道云暗色主题（蓝色主题色）
+   原版框架为浅色（color-blue light），首页看板内容为深色背景图
    ============================================================ */
 
 :root {
-  --bg-page: #151a2c;
-  --bg-sidebar: #1b2138;
-  --bg-card: #232842;
-  --bg-card-hover: #29314c;
-  --bg-input: rgba(255, 255, 255, 0.04);
-  --bg-hover: rgba(255, 255, 255, 0.03);
-  --bg-active: rgba(128, 149, 255, 0.16);
+  --bg-page: #f3f3f8;
+  --bg-sidebar: #f3f3f8;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f5f6fa;
+  --bg-input: rgba(19, 29, 46, 0.05);
+  --bg-hover: rgba(19, 29, 46, 0.05);
+  --bg-active: #e8f1ff;
 
-  --primary: #8095ff;
-  --primary-strong: #5f7bff;
+  --primary: #2b73f0;
+  --primary-strong: #3062c1;
 
-  --text: rgba(255, 255, 255, 0.92);
-  --text-secondary: rgba(255, 255, 255, 0.68);
-  --text-tertiary: rgba(255, 255, 255, 0.40);
-  --text-quaternary: rgba(255, 255, 255, 0.26);
+  --text: #131d2e;
+  --text-secondary: #5b6472;
+  --text-tertiary: #8a919c;
+  --text-quaternary: #b3bac4;
 
-  --border: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.40);
+  --border: #e1e4ea;
+  --border-strong: #dadee5;
 
   --blue: #3895e0;
   --cyan: #15b6ac;
@@ -95,12 +95,12 @@ html, body {
   width: 28px;
   height: 28px;
   border-radius: 6px;
-  background: linear-gradient(135deg, #8095ff, #5f7bff);
+  background: linear-gradient(135deg, #2b73f0, #3062c1);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(128, 149, 255, 0.35);
+  box-shadow: 0 2px 6px rgba(43, 115, 240, 0.35);
 }
 
 .app-icon .preset-icon {
@@ -127,7 +127,7 @@ html, body {
   width: 6px;
 }
 .sidebar-menu::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(19, 29, 46, 0.15);
   border-radius: 3px;
 }
 
@@ -190,6 +190,72 @@ html, body {
   letter-spacing: 0.5px;
 }
 
+/* ============ 可折叠子菜单 ============ */
+.menu-item.has-sub .menu-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.sub-arrow {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  color: var(--text-tertiary);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  padding-left: 6px;
+}
+
+.menu-item.has-sub:not(.open) .sub-arrow {
+  transform: rotate(-90deg);
+}
+
+.menu-item.has-sub:not(.open) + .submenu {
+  display: none;
+}
+
+.submenu {
+  overflow: hidden;
+}
+
+.submenu-item {
+  height: 32px;
+  padding-left: 46px;
+  padding-right: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  border-radius: var(--radius);
+  margin-bottom: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.15s, color 0.15s;
+}
+
+.submenu-item::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.45;
+  margin-right: 9px;
+  flex-shrink: 0;
+}
+
+.submenu-item:hover {
+  background: var(--bg-hover);
+  color: var(--text);
+}
+
+.submenu-item.active {
+  color: var(--primary);
+  background: var(--bg-active);
+}
+
 /* ============ 主内容区 ============ */
 .content {
   flex: 1;
@@ -240,6 +306,22 @@ html, body {
   flex: 1;
   overflow-y: auto;
   padding: 16px 20px 24px;
+  /* 看板内容区在深色背景图上 → 内部变量恢复暗色系（白字） */
+  --text: rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.72);
+  --text-tertiary: rgba(255, 255, 255, 0.48);
+  --text-quaternary: rgba(255, 255, 255, 0.30);
+  --border: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(255, 255, 255, 0.34);
+  --bg-input: rgba(255, 255, 255, 0.10);
+  --bg-hover: rgba(255, 255, 255, 0.08);
+  --bg-active: rgba(43, 115, 240, 0.28);
+  --primary: #2b73f0;
+  /* 原版看板背景图（dashboard-panel 用法：cover） */
+  background-image: url("../img/panel_bg.png");
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
 }
 
 .dashboard::-webkit-scrollbar {
@@ -251,14 +333,20 @@ html, body {
 }
 
 .widget {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  transition: border-color 0.15s, background 0.15s;
+  /* 原版 widget 卡片背景图（dash-widget 用法：cover + 紫色微阴影） */
+  background-image: url("../img/widget_bg.png");
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  border: none;
+  border-radius: 2px;
+  box-shadow: rgba(84, 48, 132, 0.1) 0px 2px 6px 0px;
+  transition: filter 0.15s, box-shadow 0.15s;
 }
 
 .widget:hover {
-  border-color: rgba(255, 255, 255, 0.22);
+  filter: brightness(1.06);
+  box-shadow: rgba(84, 48, 132, 0.16) 0px 3px 10px 0px;
 }
 
 /* 筛选区 */
@@ -387,7 +475,7 @@ html, body {
 }
 
 .stat-card:hover {
-  background: var(--bg-card-hover);
+  filter: brightness(1.06);
 }
 
 .stat-icon {
@@ -558,10 +646,11 @@ html, body {
 .data-table thead th {
   text-align: left;
   padding: 10px 12px;
-  color: var(--text-secondary);
+  color: #fff;
   font-weight: 500;
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid var(--border);
+  /* 原版明细表头深蓝 #005297 */
+  background: #005297;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   white-space: nowrap;
   position: sticky;
   top: 0;
@@ -690,6 +779,879 @@ html, body {
   background: transparent;
   white-space: pre-wrap;
   word-break: break-all;
+}
+
+/* ============ 动态页面容器 & 表单/数据表样式 ============ */
+.hidden {
+  display: none !important;
+}
+
+.page-view {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px 24px;
+}
+
+.page-view::-webkit-scrollbar,
+.form-page::-webkit-scrollbar {
+  width: 8px;
+}
+.page-view::-webkit-scrollbar-thumb,
+.form-page::-webkit-scrollbar-thumb {
+  background: rgba(19, 29, 46, 0.18);
+  border-radius: 4px;
+}
+
+/* ---- 表单页 ---- */
+.form-page {
+  max-width: 900px;
+}
+
+.form-page-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.form-page-head h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.f-tag {
+  font-size: 12px;
+  color: var(--primary);
+  background: var(--bg-active);
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.f-tag-flow {
+  color: #f7be54;
+  background: rgba(247, 190, 84, 0.15);
+}
+
+.f-group {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-left: auto;
+}
+
+.f-flow-tip {
+  background: rgba(247, 190, 84, 0.08);
+  border: 1px solid rgba(247, 190, 84, 0.25);
+  color: var(--text-secondary);
+  font-size: 13px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.form-body {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+}
+
+.f-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  padding-left: 10px;
+  position: relative;
+  margin: 18px 0 12px;
+}
+
+.f-section-title:first-child {
+  margin-top: 0;
+}
+
+.f-section-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 13px;
+  border-radius: 2px;
+  background: var(--primary);
+}
+
+.f-field {
+  margin-bottom: 14px;
+}
+
+.f-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.f-label .req,
+.req {
+  color: #f53f3f;
+  font-style: normal;
+  margin-left: 2px;
+}
+
+.f-input,
+.f-textarea,
+.f-select {
+  width: 100%;
+  max-width: 560px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 13px;
+  padding: 8px 12px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.f-input:focus,
+.f-textarea:focus,
+.f-select:focus {
+  border-color: var(--primary);
+}
+
+.f-textarea {
+  resize: vertical;
+}
+
+.f-select {
+  cursor: pointer;
+}
+
+.f-select option {
+  background: #232842;
+  color: var(--text);
+}
+
+.f-radios {
+  display: inline-flex;
+  gap: 18px;
+}
+
+.f-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.f-radio input {
+  accent-color: var(--primary);
+}
+
+/* ---- 子表单 ---- */
+.f-subform-box {
+  margin-bottom: 16px;
+}
+
+.f-subtable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.f-subtable th {
+  text-align: left;
+  padding: 8px 10px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+}
+
+.f-subtable td {
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.f-sub-input {
+  max-width: none;
+  padding: 5px 8px;
+}
+
+.f-sub-add {
+  margin-top: 8px;
+  background: transparent;
+  border: 1px dashed var(--border-strong);
+  color: var(--primary);
+  border-radius: 4px;
+  padding: 4px 14px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.f-sub-add:hover {
+  border-color: var(--primary);
+  background: var(--bg-active);
+}
+
+/* ---- 表单底部按钮 ---- */
+.form-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.form-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.form-btn:hover {
+  border-color: var(--primary);
+}
+
+.form-btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.form-btn-primary:hover {
+  background: var(--primary-strong);
+}
+
+.form-demo-tip {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-quaternary);
+}
+
+/* ---- 数据表页 ---- */
+.table-page {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+
+.table-page-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.table-page-head h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tp-tools {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+.tp-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: 4px;
+  padding: 5px 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.tp-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.tp-sub {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+}
+
+.tp-empty {
+  text-align: center;
+  padding: 40px 0 !important;
+}
+
+/* ---- 占位页 ---- */
+.ph-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+
+.ph-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 40px 50px;
+  text-align: center;
+  max-width: 460px;
+}
+
+.ph-icon {
+  font-size: 40px;
+  margin-bottom: 14px;
+}
+
+.ph-card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.ph-card p {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   亮色内容主题 —— 动态页面（表单/数据表）覆盖为原版亮色观感
+   原版实测：白底、文字 #131D2E、主蓝 #2B73F0、必填 #EF5655、
+   边框 #DADEE5、表头 #F7F8FA
+   ============================================================ */
+.page-view {
+  background: #ffffff;
+  --bg-card: #ffffff;
+  --bg-hover: #f5f7fa;
+  --bg-active: #e8f1ff;
+  --border: #e1e4ea;
+  --border-strong: #dadee5;
+  --text: #131d2e;
+  --text-secondary: #5b6472;
+  --text-tertiary: #8a919c;
+  --text-quaternary: #b3bac4;
+  --primary: #2b73f0;
+  --primary-strong: #3062c1;
+}
+
+/* 页面头（标题区） */
+.page-view .form-page-head h2,
+.page-view .table-page-head h2 {
+  color: #131d2e;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.page-view .f-group {
+  color: #8a919c;
+}
+
+.page-view .f-tag {
+  color: #2b73f0;
+  background: #e8f1ff;
+}
+
+.page-view .f-tag-flow {
+  color: #c2800a;
+  background: #fdf3e1;
+}
+
+.page-view .f-flow-tip {
+  background: #fffbea;
+  border: 1px solid #f0dfae;
+  color: #7a5c16;
+}
+
+/* 表单主体（白底卡片） */
+.page-view .form-body {
+  background: #ffffff;
+  border: 1px solid #e1e4ea;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(19, 29, 46, 0.04);
+}
+
+/* 分组标题：左侧竖线 + 深色字 */
+.page-view .f-section-title {
+  color: #131d2e;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.page-view .f-section-title::before {
+  background: #2b73f0;
+}
+
+/* 字段标签：14px 粗体 */
+.page-view .f-label {
+  color: #131d2e;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.page-view .req {
+  color: #ef5655;
+}
+
+/* 输入控件 */
+.page-view .f-input,
+.page-view .f-textarea,
+.page-view .f-select {
+  background: #ffffff;
+  border: 1px solid #d8dee5;
+  border-radius: 6px;
+  color: #131d2e;
+  min-height: 32px;
+  font-size: 14px;
+}
+
+.page-view .f-input:focus,
+.page-view .f-textarea:focus,
+.page-view .f-select:focus {
+  border-color: #2b73f0;
+  box-shadow: 0 0 0 2px rgba(43, 115, 240, 0.1);
+}
+
+.page-view .f-input::placeholder,
+.page-view .f-textarea::placeholder {
+  color: #b3bac4;
+}
+
+.page-view .f-select option {
+  background: #fff;
+  color: #131d2e;
+}
+
+.page-view .f-radio {
+  color: #131d2e;
+}
+
+.page-view .f-radio input {
+  accent-color: #2b73f0;
+}
+
+/* 子表单 */
+.page-view .f-subtable th {
+  color: #131d2e;
+  font-weight: 600;
+  background: #f7f8fa;
+  border: 1px solid #e7eaef;
+}
+
+.page-view .f-subtable td {
+  border: 1px solid #eef0f4;
+  background: #fff;
+}
+
+.page-view .f-sub-add {
+  border-color: #b3bac4;
+  color: #2b73f0;
+}
+
+.page-view .f-sub-add:hover {
+  border-color: #2b73f0;
+  background: #e8f1ff;
+}
+
+/* 表单底部按钮（原版：提交=蓝底白字，保存草稿=白底灰边） */
+.page-view .form-btn {
+  background: #ffffff;
+  border: 1px solid #dadee5;
+  color: #131d2e;
+  border-radius: 6px;
+  height: 32px;
+  min-width: 120px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.page-view .form-btn:hover {
+  border-color: #2b73f0;
+  color: #2b73f0;
+}
+
+.page-view .form-btn-primary {
+  background: #2b73f0;
+  border-color: #2b73f0;
+  color: #fff;
+}
+
+.page-view .form-btn-primary:hover {
+  background: #3062c1;
+  border-color: #3062c1;
+  color: #fff;
+}
+
+.page-view .form-demo-tip {
+  color: #b3bac4;
+}
+
+/* 数据表页 */
+.page-view .table-page {
+  background: #ffffff;
+  border: 1px solid #e1e4ea;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(19, 29, 46, 0.04);
+}
+
+.page-view .table-page-head h2 {
+  color: #131d2e;
+}
+
+.page-view .tp-btn {
+  background: #fff;
+  border: 1px solid #d8dee5;
+  color: #5b6472;
+  border-radius: 4px;
+  height: 30px;
+}
+
+.page-view .tp-btn:hover {
+  border-color: #2b73f0;
+  color: #2b73f0;
+}
+
+.page-view .tp-sub {
+  color: #8a919c;
+}
+
+.page-view .tp-table thead th {
+  background: #f7f8fa;
+  color: #131d2e;
+  font-weight: 600;
+  border-bottom: 1px solid #e7eaef;
+  white-space: nowrap;
+}
+
+.page-view .tp-table tbody td {
+  border-bottom: 1px solid #f0f2f5;
+  color: #131d2e;
+}
+
+.page-view .tp-table tbody tr:hover {
+  background: #f7f9fc;
+}
+
+.page-view .pagination {
+  color: #8a919c;
+}
+
+/* 占位页 */
+.page-view .ph-card {
+  background: #fff;
+  border: 1px solid #e1e4ea;
+}
+
+.page-view .ph-card h3 {
+  color: #131d2e;
+}
+
+.page-view .ph-card p {
+  color: #8a919c;
+}
+
+/* 表格通用单元格空态 */
+.page-view .cell-empty {
+  color: #b3bac4;
+}
+
+/* ============================================================
+   全宽数据列表页（原版「管理全部数据」）
+   ============================================================ */
+.page-view .list-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.list-head {
+  display: flex;
+  align-items: center;
+  padding: 2px 0 12px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.list-mode {
+  font-size: 15px;
+  font-weight: 600;
+  color: #131d2e;
+}
+
+.list-tools {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lp-add {
+  background: #2b73f0;
+  color: #fff;
+  border: 1px solid #2b73f0;
+  height: 30px;
+  padding: 0 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.lp-add:hover {
+  background: #3062c1;
+}
+
+.lp-btn {
+  background: #fff;
+  border: 1px solid #d8dee5;
+  color: #5b6472;
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.lp-btn:hover {
+  color: #2b73f0;
+  border-color: #2b73f0;
+}
+
+.list-scroll {
+  flex: 1;
+  overflow: auto;
+  border: 1px solid #e7eaef;
+  border-radius: 2px;
+  min-height: 0;
+}
+
+.list-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  min-width: 100%;
+}
+
+.list-table thead th {
+  text-align: left;
+  background: #f7f8fa;
+  color: #131d2e;
+  font-weight: 600;
+  padding: 0 12px;
+  height: 34px;
+  border-bottom: 1px solid #e7eaef;
+  border-right: 1px solid #f0f2f5;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.list-table thead th:last-child {
+  border-right: none;
+}
+
+.list-table tbody td {
+  height: 35px;
+  padding: 0 12px;
+  color: #131d2e;
+  border-bottom: 1px solid #f0f2f5;
+  border-right: 1px solid #f6f7f9;
+  white-space: nowrap;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-table tbody tr:hover td {
+  background: #f5f8fd;
+}
+
+.lp-empty {
+  text-align: center;
+  padding: 56px 0 !important;
+  font-size: 13px;
+}
+
+.lp-foot {
+  justify-content: flex-end;
+  padding-top: 12px;
+}
+
+.lp-foot .page-nav {
+  color: #5b6472;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ============================================================
+   表单弹窗（原版「添加」→ 780px 白色模态）
+   ============================================================ */
+.fm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5vh 20px 20px;
+}
+
+.fm-modal {
+  width: 780px;
+  max-width: 96vw;
+  max-height: 88vh;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.fm-head {
+  min-height: 61px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid #eef0f3;
+  flex-shrink: 0;
+}
+
+.fm-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: #131d2e;
+}
+
+.fm-close {
+  margin-left: auto;
+  font-size: 24px;
+  line-height: 1;
+  color: #8a919c;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.fm-close:hover {
+  color: #131d2e;
+}
+
+.fm-body {
+  overflow-y: auto;
+  padding: 18px 24px 24px;
+  flex: 1;
+  min-height: 0;
+}
+
+.fm-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-top: 1px solid #eef0f3;
+  flex-shrink: 0;
+}
+
+.fm-tip {
+  margin-left: auto;
+  font-size: 12px;
+  color: #b3bac4;
+}
+
+/* 弹窗内字段宽度自适应（无 560 限制） */
+.fm-body .f-input,
+.fm-body .f-textarea,
+.fm-body .f-select {
+  max-width: none;
+}
+
+/* ============================================================
+   流程空态页（原版：我的待办等）
+   ============================================================ */
+.flow-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.flow-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 2px 0 12px;
+  flex-wrap: wrap;
+}
+
+.flow-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #131d2e;
+  white-space: nowrap;
+}
+
+.flow-tabs {
+  display: inline-flex;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.flow-tab {
+  font-size: 13px;
+  color: #5b6472;
+  padding: 4px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+
+.flow-tab:hover {
+  color: #2b73f0;
+}
+
+.flow-tab.active {
+  color: #2b73f0;
+  font-weight: 600;
+  border-bottom-color: #2b73f0;
+}
+
+.flow-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.flow-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 320px;
+}
+
+.flow-empty p {
+  font-size: 13px;
+  color: #b3bac4;
 }
 
 /* ============ 响应式 ============ */
